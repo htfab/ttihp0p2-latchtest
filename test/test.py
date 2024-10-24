@@ -25,14 +25,14 @@ async def test_project(dut):
 
     dut._log.info("Test project behavior")
 
-    return # XXX XXX XXX XXX XXX
-
     dut.uio_in.value = 0
 
     dut.ui_in.value = 0b00000011
     await ClockCycles(dut.clk, 1)
     assert dut.uo_out.value == 0b00000001
 
+    dut.ui_in.value = 0b00000110
+    await ClockCycles(dut.clk, 1)
     dut.ui_in.value = 0b00001100
     await ClockCycles(dut.clk, 1)
     assert dut.uo_out.value == 0b00000001
@@ -41,6 +41,8 @@ async def test_project(dut):
     await ClockCycles(dut.clk, 1)
     assert dut.uo_out.value == 0b00000010
 
+    dut.ui_in.value = 0b00001100
+    await ClockCycles(dut.clk, 1)
     dut.ui_in.value = 0b00000110
     await ClockCycles(dut.clk, 1)
     assert dut.uo_out.value == 0b00000010
